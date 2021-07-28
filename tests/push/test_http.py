@@ -123,7 +123,7 @@ class HTTPPusherTests(HomeserverTestCase):
                 device_display_name="pushy push",
                 pushkey="a@example.com",
                 lang=None,
-                data={"url": "http://example.com/_matrix/push/v1/notify"},
+                data={"url": "http://example.com/foo/_matrix/push/v1/notify"},
             )
         )
 
@@ -159,7 +159,7 @@ class HTTPPusherTests(HomeserverTestCase):
         # One push was attempted to be sent -- it'll be the first message
         self.assertEqual(len(self.push_attempts), 1)
         self.assertEqual(
-            self.push_attempts[0][1], "http://example.com/_matrix/push/v1/notify"
+            self.push_attempts[0][1], "http://example.com/foo/_matrix/push/v1/notify"
         )
         self.assertEqual(
             self.push_attempts[0][2]["notification"]["content"]["body"], "Hi!"
@@ -181,7 +181,7 @@ class HTTPPusherTests(HomeserverTestCase):
         # Now it'll try and send the second push message, which will be the second one
         self.assertEqual(len(self.push_attempts), 2)
         self.assertEqual(
-            self.push_attempts[1][1], "http://example.com/_matrix/push/v1/notify"
+            self.push_attempts[1][1], "http://example.com/foo/_matrix/push/v1/notify"
         )
         self.assertEqual(
             self.push_attempts[1][2]["notification"]["content"]["body"], "There!"

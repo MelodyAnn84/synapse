@@ -96,9 +96,9 @@ class HttpPusher(Pusher):
         url_parts = urllib.parse.urlparse(url)
         # Note that the specification also says the scheme must be HTTPS, but
         # it isn't up to the homeserver to verify that.
-        if url_parts.path != "/_matrix/push/v1/notify":
+        if "/_matrix/push/v1/notify" not in url_parts.path:
             raise PusherConfigException(
-                "'url' must have a path of '/_matrix/push/v1/notify'"
+                "'url' must contain a path of '/_matrix/push/v1/notify'"
             )
 
         self.url = url
